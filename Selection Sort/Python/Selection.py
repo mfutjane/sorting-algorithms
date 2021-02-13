@@ -1,23 +1,77 @@
-# Find the smallest/largest element and move it ahead
 
-def min_index(iterable_elements):
-    min_element = min(iterable_elements)
-    return iterable_elements.index(min_element)
+def min_index(elements):
+    """
+    Find the index of the smallest item in elements
+
+    Arguments
+    ----------
+    elements :
+        any iterable containing elements that can be compared
+    
+    Returns 
+    -------
+    int :
+        the index of the smallest item in elements
+    """
+
+    min = elements[0]
+    index = 0
+
+    for i in range(len(elements)):
+        if elements[i] < min:
+            index = i
+            min = elements[i]
+    return index
 
 
-def max_index(iterable_elements):
-    max_element = max(iterable_elements)
-    return iterable_elements.index(max_element)
+def max_index(elements):
+    """
+    Find the index of the largest item in elements
 
-def selection_sort(iterable_elements, descending=False):
+    Arguments
+    ----------
+    elements :
+        any iterable containing elements that can be compared
+    
+    Returns 
+    -------
+    int :
+        the index of the largest item in elements
+    """
+
+    max = elements[0]
+    index = 0
+
+    for i in range(len(elements)):
+        if elements[i] > max:
+            index = i
+            max = elements[i]
+    return index
+
+
+def selection_sort(elements, descending=False):
+    """
+    Sort elements in ascending or descending order.
+
+    Arguments
+    ----------
+    elements:
+        any iterable with comparable elements
+        
+    descending (named):
+        boolean that determines whether to sort in descending order (true)
+        or in ascending order (false). Default: false
+
+    Returns
+    -------
+    iterable:
+        elements sorted in the requested order
+    """
+
+    length = len(elements)
     find_next = max_index if descending else min_index
 
-    for i in range(len(iterable_elements)):
-        next_element = find_next(iterable_elements[i:])
-        iterable_elements[i], iterable_elements[i + next_element] = iterable_elements[i + next_element], iterable_elements[i] 
-    return iterable_elements
-
-if __name__ == "__main__":
-    res = selection_sort(open("testfile.txt", "r").readlines(), descending=True)
-    for line in res:
-        print(line)
+    for i in range(length):
+        index = find_next(elements[i:])
+        elements[i], elements[i + index] = elements[i + index], elements[i] 
+    return elements

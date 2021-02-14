@@ -1,51 +1,34 @@
 
-def min_index(elements):
+def find_index(elements, descending):
     """
-    Find the index of the smallest item in elements
+    Find the index of the smallest/largest item in elements
+    depending on the requested order.
 
     Arguments
     ----------
     elements :
         any iterable containing elements that can be compared
     
+    descending :
+        boolean describing the order elements will be sorted in.
+        true = descending order, false = ascending order
+
     Returns 
     -------
     int :
-        the index of the smallest item in elements
+        the index of the appropriate item in elements depending on order
     """
 
-    min = elements[0]
+    candidate = elements[0]
     index = 0
 
     for i in range(len(elements)):
-        if elements[i] < min:
+        comparison = elements[i] > candidate if descending else \
+            elements[i] < candidate 
+        
+        if comparison == True:
             index = i
-            min = elements[i]
-    return index
-
-
-def max_index(elements):
-    """
-    Find the index of the largest item in elements
-
-    Arguments
-    ----------
-    elements :
-        any iterable containing elements that can be compared
-    
-    Returns 
-    -------
-    int :
-        the index of the largest item in elements
-    """
-
-    max = elements[0]
-    index = 0
-
-    for i in range(len(elements)):
-        if elements[i] > max:
-            index = i
-            max = elements[i]
+            candidate = elements[i]
     return index
 
 
@@ -69,9 +52,8 @@ def selection_sort(elements, descending=False):
     """
 
     length = len(elements)
-    find_next = max_index if descending else min_index
 
     for i in range(length):
-        index = find_next(elements[i:])
+        index = find_index(elements[i:], descending)
         elements[i], elements[i + index] = elements[i + index], elements[i] 
     return elements

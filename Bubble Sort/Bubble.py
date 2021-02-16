@@ -53,3 +53,11 @@ def bubble_sort(elements, descending=False):
     for i in range(length):
        elements = compare_adjacent_elements(elements, length-i, descending)
     return elements
+    """
+    
+    length = len(elements)
+
+    for i in range(length):
+        elements = compare_adjacent_elements(elements, length-i, descending)
+
+    return elements

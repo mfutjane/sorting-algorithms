@@ -54,10 +54,16 @@ def bubble_sort(elements, descending=False):
        elements = compare_adjacent_elements(elements, length-i, descending)
     return elements
     """
+
+    flag = False
+    if (type(elements) == str):
+        elements = list(elements)
+        flag = True
     
     length = len(elements)
 
     for i in range(length):
         elements = compare_adjacent_elements(elements, length-i, descending)
 
-    return elements
+    elements = "".join(elements) if flag else elements 
+    return elements 

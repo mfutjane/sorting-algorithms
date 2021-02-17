@@ -52,11 +52,17 @@ def insertion_sort(elements, descending=False):
     iterable:
         elements sorted in the requested order
     """
-    
+    flag = False
+    if (type(elements) == str):
+        elements = list(elements)
+        flag = True
+
     length = len(elements)
 
     for i in range(length):
         if i == 0:
             continue
         elements = swap_at_index(elements, i, descending)
+    
+    elements = "".join(elements) if flag else elements
     return elements

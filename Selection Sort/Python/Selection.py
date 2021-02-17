@@ -50,10 +50,16 @@ def selection_sort(elements, descending=False):
     iterable:
         elements sorted in the requested order
     """
+    flag = False
+    if (type(elements) == str):
+        elements = list(elements)
+        flag = True
 
     length = len(elements)
 
     for i in range(length):
         index = find_index(elements[i:], descending)
         elements[i], elements[i + index] = elements[i + index], elements[i] 
+    
+    elements = "".join(elements) if flag else elements
     return elements
